@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# echo using red letters.
+function print_red {
+  RED='\033[0;31m'
+  echo -e "${RED} $@"
+}
+
+function autopep8_staged_files {
+  # Collect all staged python files that are not deleted.
+  STAGED_PYTHON_FILES=$(git diff --name-only --staged --diff-filter=d *.py)
+  # Collect files where autopep8 actually changed something so that we can report those.
+  AUTOPEPED=()
+  for f in $STAGED_PYTHON_FILES; do
+    HASH_BEFORE=$(md5sum $f)
+    autopep8 -ia $f
+    HASH_AFTER=$(md5sum $f)
+    if [[ $HASH_BEFORE != $HASH_AFTER ]]; then
+      AUTOPEPED+=($f)
+    fi
+  done
+  if [[ ${#AUTOPEPED[@]} -gt 0 ]]; then
+    print_red "Files altered by autopep:"
+    for f in ${AUTOPEPED[@]}; do
+      print_red "  $f"
+    done
+    # Stop commit.
+    exit 1
+  fi
+}
+
+# Activate the development virtual env so that we have autopep8
+source .dev_venv/bin/activate
+autopep8_staged_files
