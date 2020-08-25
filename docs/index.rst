@@ -8,6 +8,7 @@ Welcome to Texas holdem's documentation!
    readme
    installation
    usage
+   glossary
    references/index
    authors
    changelog
