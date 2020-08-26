@@ -55,9 +55,9 @@ test: ## run tests quickly with the default Python
 	${ACTIVATE_VENV} && tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source src/texas_holdem -m unittest tests
-	coverage report -m
-	coverage html
+	${ACTIVATE_VENV} && PYTHONPATH=src coverage run -m unittest discover tests
+	${ACTIVATE_VENV} && coverage report -m
+	${ACTIVATE_VENV} && coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
