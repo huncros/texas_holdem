@@ -17,17 +17,18 @@ setup_requirements = []
 setup(
     author="David Herskovics",
     author_email='huncros@gmail.com',
-    python_requires='>=3.5',
+    python_requires='>=3.6',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
-    description="Calculates your chances when playing Texas hold'em poker.",
+    description="Calculates your chances when playing Texas Hold'em poker.",
     entry_points={
         'console_scripts': [
             'texas_holdem=texas_holdem.cli:main',
