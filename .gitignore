@@ -20,6 +20,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# pyenv
+.python-version
+
 # tox
 .tox
 
