@@ -1,8 +1,6 @@
 from typing import NamedTuple
 from enum import Enum, IntEnum
 
-from texas_holdem.utils import NamedTupleWithDocString
-
 
 class Suit(Enum):
   CLUBS = 'Clubs'
@@ -28,7 +26,9 @@ class Rank(IntEnum):
   ACE = 14
 
 
-Card = NamedTuple('Card', [('suit', Suit), ('rank', Rank)])
+class Card(NamedTuple):
+  suit: Suit
+  rank: Rank
 
 
 def card_value(card: Card) -> int:
@@ -36,14 +36,16 @@ def card_value(card: Card) -> int:
   return card.rank.value
 
 
-HoleCards = NamedTupleWithDocString(
-    'The 2 private cards the player is has.',
-    'HoleCards', [('c1', Card), ('c2', Card)]
-)
+class HoleCards(NamedTuple):
+  'The 2 private cards the player has.'
+  c1: Card
+  c2: Card
 
 
-Board = NamedTupleWithDocString(
-    'The 5 shared cards (community cards) that every player can use to create their hand.',
-    'Board',
-    [('c1', Card), ('c2', Card), ('c3', Card), ('c4', Card), ('c5', Card)]
-)
+class Board(NamedTuple):
+  'The 5 shared cards (community cards) that every player can use to create their hand.'
+  c1: Card
+  c2: Card
+  c3: Card
+  c4: Card
+  c5: Card

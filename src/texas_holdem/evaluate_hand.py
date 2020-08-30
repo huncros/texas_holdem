@@ -1,12 +1,11 @@
-'''Computes the rank and relative strenght within the rank of the best hand that the player can
+'''Computes the rank and relative strength within the rank of the best hand that the player can
 form from their 2 hole cards and the 5 community cards (the board).
 '''
 from enum import IntEnum
 from collections import Counter
-from typing import List
+from typing import List, NamedTuple, Optional
 
 from texas_holdem.card import Card, Rank, card_value, HoleCards, Board
-from texas_holdem.utils import NamedTupleWithDocString
 
 
 class HandRank(IntEnum):
@@ -30,20 +29,19 @@ def sort_hand_ranks_in_decr_order() -> List[HandRank]:
   return sorted(HandRank, reverse=True)
 
 
-HandValue = NamedTupleWithDocString(
-    '''Describes the strength of a hand so we can compare hands.
+class HandValue(NamedTuple):
+  '''Describes the strength of a hand so we can compare hands.
 
-    A hand's strength is primarily determined by its rank (e.g. flush). In the case when two
-    hands have the same rank, then which hand is stronger is decided through comparing the rank of
-    the cards making up the hand in a decreasing order.
-    E.g. if both players have two pairs, then first they compare the rank of their higher ranked 
-    pair and the higher rank wins. If it's the same, then they compare the rank of their lower
-    ranked pair. If it's still equal then they compare the rank of their 5th card which is not
-    part of a pair.
-    ''',
-    'HandValue',
-    [('rank', HandRank), ('tie_breaker_card_ranks', List[ Rank])]
-)
+  A hand's strength is primarily determined by its rank (e.g. flush). In the case when two
+  hands have the same rank, then which hand is stronger is decided through comparing the rank of
+  the cards making up the hand in a decreasing order.
+  E.g. if both players have two pairs, then first they compare the rank of their higher ranked
+  pair and the higher rank wins. If it's the same, then they compare the rank of their lower
+  ranked pair. If it's still equal then they compare the rank of their 5th card which is not
+  part of a pair.
+  '''
+  rank: HandRank
+  tie_breaker_card_ranks: List[Rank]
 
 
 def get_hand_value(hole_cards: HoleCards, board: Board):
