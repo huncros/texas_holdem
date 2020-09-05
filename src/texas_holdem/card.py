@@ -29,6 +29,9 @@ class Rank(IntEnum):
 class Card(NamedTuple):
   suit: Suit
   rank: Rank
+  def __str__(self):
+    rank_alias = str(self.rank.value) if self.rank <= Rank.TEN else self.rank.name[0]
+    return self.suit.name[0] + rank_alias
 
 
 def card_value(card: Card) -> int:

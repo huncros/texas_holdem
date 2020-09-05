@@ -34,8 +34,8 @@ class TestHasBetterHandThenHandValue(unittest.TestCase):
       board = Board(*cards[2:])
       hv = get_hand_value(hole_cards, board)
       self.assertEqual( hv.rank, rank, msg=(
-            f'Cards {cards} are supposed to form a hand of rank {rank.name} but it is of ' +
-            f'{hv.rank.name}.')
+            f'Cards {[str(c) for c in cards]} are supposed to form a hand of rank {rank.name} ' +
+            f'but it is of {hv.rank.name}.')
           )
       hand_values[rank] = hv
     for r1, r2 in permutations(cards_for_ranks.keys(), 2):
