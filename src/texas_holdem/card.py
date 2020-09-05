@@ -54,6 +54,8 @@ class HoleCards(NamedTuple):
   'The 2 private cards the player has.'
   c1: Card
   c2: Card
+  def __eq__(self, other):
+    return set(self) == set(other)
 
 
 class Board(NamedTuple):
