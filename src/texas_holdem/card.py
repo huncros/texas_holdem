@@ -36,6 +36,17 @@ def card_value(card: Card) -> int:
   return card.rank.value
 
 
+def list_all_cards():
+  'A generator listing all the cards in the deck.'
+  for suit in Suit:
+    for rank in Rank:
+      if rank == Rank.ACE_LOW:
+        # ACE and ACE_LOW are the same card with the difference being whether we consider ACE
+        # as the rank following KING or preceding TWO.
+        continue
+      yield Card(suit=suit, rank=rank)
+
+
 class HoleCards(NamedTuple):
   'The 2 private cards the player has.'
   c1: Card

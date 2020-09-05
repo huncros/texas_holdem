@@ -1,7 +1,7 @@
 import unittest
 from itertools import permutations
 
-from texas_holdem.card import HoleCards, Board
+from texas_holdem.card import HoleCards, Board, Rank
 from texas_holdem.evaluate_hand import HandRank, HandValue, get_hand_value
 from texas_holdem.compare_hands import has_better_hand_than_hand_value
 from texas_holdem.shorthand_notations import *

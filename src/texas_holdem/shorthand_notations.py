@@ -7,15 +7,15 @@ Usage
 
     >>> from shorthand_notations import *
 '''
-from texas_holdem.card import Card, Rank, Suit
+from texas_holdem.card import Rank, list_all_cards
 
 
-for suit in Suit:
-  for rank in Rank:
-    if rank == Rank.ACE_LOW:
-      # ACE and ACE_LOW are the same card with the difference being whether we consider ACE
-      # as the rank following KING or preceding TWO.
-      continue
-    rank_alias = str(rank.value) if rank <= Rank.TEN else rank.name[0]
-    alias = suit.name[0] + rank_alias
-    globals()[alias] = Card(rank=rank, suit=suit)
+aliases = []
+for card in list_all_cards():
+  rank_alias = str(card.rank.value) if card.rank <= Rank.TEN else card.rank.name[0]
+  alias = card.suit.name[0] + rank_alias
+  globals()[alias] = card
+  aliases.append(alias)
+
+
+__all__ = aliases
