@@ -42,18 +42,6 @@ def has_better_hand_than_hand_value(
       skip = _STRICTER_VERSIONS_OF_HAND_RANKS.get(rank, [])
       checks_skipped.extend(skip)
       continue
-    if _first_hand_value_is_stronger(hand_value, compare_to):
+    if compare_to < hand_value:
       return True
   return False
-
-
-def _first_hand_value_is_stronger(first: HandValue, second: HandValue) -> bool:
-  if first.rank == second.rank:
-    for (r1, r2) in zip(first.tie_breaker_card_ranks, second.tie_breaker_card_ranks):
-      if r1 == r2:
-        continue
-      return r1 > r2
-    # The HandValue is the same.
-    return False
-  else:
-    return first.rank > second.rank

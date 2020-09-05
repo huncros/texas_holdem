@@ -1,8 +1,9 @@
 '''Computes the rank and relative strength within the rank of the best hand that the player can
 form from their 2 hole cards and the 5 community cards (the board).
 '''
-from enum import IntEnum
 from collections import Counter
+from enum import IntEnum
+from functools import total_ordering
 from typing import List, NamedTuple, Optional
 
 from texas_holdem.card import Card, Rank, card_value, HoleCards, Board
@@ -29,6 +30,7 @@ def sort_hand_ranks_in_decr_order() -> List[HandRank]:
   return sorted(HandRank, reverse=True)
 
 
+@total_ordering
 class HandValue(NamedTuple):
   '''Describes the strength of a hand so we can compare hands.
 
@@ -42,6 +44,16 @@ class HandValue(NamedTuple):
   '''
   rank: HandRank
   tie_breaker_card_ranks: List[Rank]
+  def __lt__(self, other):
+    if self.rank == other.rank:
+      for r1, r2 in zip(self.tie_breaker_card_ranks, other.tie_breaker_card_ranks):
+        if r1 == r2:
+          continue
+        return r1 < r2
+      # The 2 `HandValue`s are the same.
+      return False
+    else:
+      return self.rank < other.rank
 
 
 def get_hand_value(hole_cards: HoleCards, board: Board):

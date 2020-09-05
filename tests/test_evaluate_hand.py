@@ -26,6 +26,25 @@ class TestHandRankSorting(unittest.TestCase):
         ])
 
 
+class TestHandValue(unittest.TestCase):
+  def test_comparison(self):
+    hv1 = HandValue(
+        rank=HandRank.TWO_PAIRS,
+        tie_breaker_card_ranks=[Rank.SIX, Rank.TWO, Rank.KING])
+    hv2 = HandValue(
+        rank=HandRank.TWO_PAIRS,
+        tie_breaker_card_ranks=[Rank.SIX, Rank.TWO, Rank.ACE])
+    hv3 = HandValue(
+        rank=HandRank.THREE_OF_A_KIND,
+        tie_breaker_card_ranks=[Rank.TWO, Rank.THREE, Rank.FOUR])
+    self.assertTrue(hv1 < hv2)
+    self.assertFalse(hv1 > hv2)
+    self.assertTrue(hv2 < hv3)
+    self.assertFalse(hv2 > hv3)
+    self.assertTrue(hv1 < hv3)
+    self.assertFalse(hv1 > hv3)
+
+
 class TestEvaluateHand(unittest.TestCase):
   def test_high_card(self):
     hole_cards = [S2, S3]
