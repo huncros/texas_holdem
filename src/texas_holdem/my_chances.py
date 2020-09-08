@@ -1,4 +1,5 @@
 from functools import reduce
+from multiprocessing import Pool
 import operator as op
 from itertools import combinations
 from statistics import mean
@@ -26,14 +27,18 @@ def compute(hole_cards: Sequence[Card], community_cards: Sequence[Card]):
   hole_cards_ = HoleCards(*hole_cards)
   community_cards_ = tuple(community_cards)
   possible_boards = list_possible_boards(hole_cards_, community_cards_)
+  possible_cards_seen = ((hole_cards_, board) for board in possible_boards)
 
-  def compute_num_better_hole_cards(board):
-    return len(find_better_hole_cards(hole_cards_, board))
+  with Pool() as p:
+    avg_better_hole_cards = mean(p.map(worker, possible_cards_seen))
 
-  num_better_hole_cards_per_board = map(compute_num_better_hole_cards, possible_boards)
-  avg_better_hole_cards = mean(num_better_hole_cards_per_board)
   num_possible_hole_cards = n_choose_m(45, 2)
   return  1 - (avg_better_hole_cards / num_possible_hole_cards)
+
+
+def worker(cards_seen):
+  hole_cards, board = cards_seen
+  return len(find_better_hole_cards(hole_cards, board))
 
 
 def list_possible_boards(hole_cards, community_cards):
