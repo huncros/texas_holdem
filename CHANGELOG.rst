@@ -2,7 +2,7 @@
 Changelog
 =========
 
-0.1.0
+1.0.0
 ------------------
 
-* Start project
+* Publish project on Github
