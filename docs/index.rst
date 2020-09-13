@@ -6,8 +6,6 @@ Welcome to Texas holdem's documentation!
    :caption: Contents:
 
    readme
-   installation
-   usage
    glossary
    references/index
    authors
