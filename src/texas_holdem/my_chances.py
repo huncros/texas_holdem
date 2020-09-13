@@ -15,11 +15,9 @@ def compute(hole_cards: Sequence[Card], community_cards: Sequence[Card]):
 
   The "player sitting across you" can be replaced with any of your opponents.
 
-  This function can be also used to gauge your chances in case there are multiple opponents. This
-  is because the probability of having a hand not weaker than the player sitting across to you is at
-  least 0.5 if and only if the probability of having a hand not weaker than any of your opponents
-  is at least 1/N, where N is the number of players - i.e. the probability of you being the
-  favorite.
+  Knowing your chances against any of your opponets is intuitively also a good heuristic to gauge
+  your chances in case of multiple opponents while being much easier to compute compared to the
+  probability that none of your opponents having a better hand than you.
   '''
   assert len(hole_cards) == 2, f'Needs exactly 2 hole cards. Got: {len(hole_cards)}.'
   assert len(community_cards) in (0, 3, 4, 5), (
