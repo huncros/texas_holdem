@@ -34,6 +34,21 @@ class Card(NamedTuple):
     return self.suit.name[0] + rank_alias
 
 
+def parse(card_alias: str) -> Card:
+  '''Takes a shorthand notation of a card (e.g. S10 or DA for 10 of spades or ace of diamonds) and
+  returns a correspoding Card instance.
+  '''
+  suit_alias = card_alias[0]
+  suit = next(s for s in Suit if s.value.startswith(suit_alias))
+  rank_alias = card_alias[1:]
+  try:
+    rank_value = int(rank_alias)
+  except:
+    rank_value = {'J': 11, 'Q': 12, 'K': 13, 'A': 14}[rank_alias]
+  rank = next(r for r in Rank if r.value == rank_value)
+  return Card(suit=suit, rank=rank)
+
+
 def card_value(card: Card) -> int:
   "Assigns a value to each card based on their rank."
   return card.rank.value
