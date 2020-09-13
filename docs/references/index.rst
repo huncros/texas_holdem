@@ -5,4 +5,9 @@ Module references
    :maxdepth: 2
    :caption: Contents:
 
-   texas_holdem
+   card
+   compare_hands
+   evaluate_hand
+   find_better_hole_cards
+   my_chances
+   shorthand_notations

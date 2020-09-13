@@ -14,4 +14,5 @@ pushd $ROOT_DIR
 python -m venv .dev_venv
 source .dev_venv/bin/activate
 pip install autopep8 coverage tox sphinx
+pip install -e .
 popd

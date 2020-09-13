@@ -63,8 +63,8 @@ coverage: ## check code coverage quickly with the default Python
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/texas_holdem.rst
 	rm -f docs/modules.rst
-	${ACTIVATE_VENV} sphinx-apidoc -o docs/ src/texas_holdem
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
+	${ACTIVATE_VENV} && sphinx-apidoc -o docs/ src/texas_holdem
+	${ACTIVATE_VENV} && $(MAKE) -C docs clean
+	${ACTIVATE_VENV} && $(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
 
