@@ -12,7 +12,7 @@ To install Texas holdem, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install texas_holdem
+    $ pip install git+git://github.com/huncros/texas-holdem.git#egg=texas-holdem
 
 This is the preferred method to install Texas holdem, as it will always install the most recent stable release.
 

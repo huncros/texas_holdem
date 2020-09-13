@@ -27,14 +27,6 @@ The motivation behind choosing this metric to determine your chances:
     assume that they can only some of the hole cards and not all of them.
 
 
-Installation
-============
-
-::
-
-    pip install git+git://github.com/huncros/texas-holdem.git#egg=texas-holdem
-
-
 Development
 ===========
 
