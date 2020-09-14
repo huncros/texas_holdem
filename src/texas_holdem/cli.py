@@ -19,6 +19,7 @@ def main():
       '--community_cards',
       '--cc',
       nargs='*',
+      default=[],
       type=parse)
 
     args = parser.parse_args()
