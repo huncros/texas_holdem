@@ -80,6 +80,31 @@ To build documentation run::
     make docs
 
 
+Support for multiple python versions
+------------------------------------
+
+The project supports python versions 3.6, 3.7 and 3.8. The test suits are run using python
+interpreters of all these versions.
+This means that to be able to run the tests, you need to have all these interpreters on your
+machine.
+A way to achieve this is using `pyenv <https://github.com/pyenv/pyenv>`_.
+You can easily install it by following the instructions from here:
+https://github.com/pyenv/pyenv-installer
+
+Once pyenv is installed, you can install the necessary versions of the interpreter by running::
+
+    pyenv install 3.6.12
+    pyenv install 3.7.9
+    pyenv install 3.8.5
+
+This will install the specific versions of python interpreters under pyenv's root directory.
+Then go to the root directory of this project and run::
+
+    pyenv local 3.6.12 3.7.9 3.8.5
+
+This will make the installed python interpreters available from anywhere in the project's repo.
+
+
 Code style
 ----------
 
