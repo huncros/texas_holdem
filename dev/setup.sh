@@ -1,5 +1,6 @@
-#!/bin/bash -xue
+#!/bin/env bash
 # Sets up local development environment.
+set xue
 
 cd $(dirname $0)
 
