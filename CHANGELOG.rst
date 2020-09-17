@@ -2,7 +2,7 @@
 Changelog
 =========
 
-1.0.0
+master
 ------------------
 
 * Publish project on Github
