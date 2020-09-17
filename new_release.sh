@@ -54,8 +54,9 @@ sed -i "s/master/$NEW_VERSION/" CHANGELOG.rst
 sed -i '5imaster\n------------------\n\n' CHANGELOG.rst
 sed -i "s/$CURRENT_VERSION/$NEW_VERSION/" src/texas_holdem/__version__.py
 git commit -am "Version $NEW_VERSION"
+git push
 
 # Add tag and push it to Github
 TAG="v${NEW_VERSION}"
 git tag $TAG
-git push tag $TAG
+git push origin tag $TAG
