@@ -62,10 +62,10 @@ To use Texas Holdem in a project::
   compute_my_chances(hole_cards=[S2, DA], community_cards=[H2, D3, S5, C9])
   # 0.548594642072903
 
-  # You can also include assumptions in the calculation of your chances. To do this, create a
-  # subclass of the `Opponent` class and overwrite its `hole_card_weight` method to return
-  # a non-negative weight for each possible scenario. Scenario here means the combination of
-  # what board can be and what hole cards the opponent can have.
+  # You can also include assumptions about your opponent's hole cards in the calculation of your
+  # chances. To do this, create a subclass of the `Opponent` class and overwrite its `hole_card
+  # weight` method to return a non-negative weight for each possible scenario. Scenario here
+  # means the combination of what board can be and what hole cards the opponent can have.
   class Cautious(Opponent):
     @staticmethod
     def hole_card_weight(hole_cards, board):
