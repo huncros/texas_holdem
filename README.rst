@@ -34,6 +34,12 @@ To install Texas holdem, run this command in your terminal::
 
     pip install git+https://github.com/huncros/texas_holdem.git#egg=texas_holdem
 
+You can also install specific versions of this project using::
+
+    pip install git+https://github.com/huncros/texas_holdem.git@{version-tag}
+
+You can check the existing version tags on GitHub.
+
 
 Usage
 =====
@@ -133,6 +139,14 @@ Code style
 The project follows pep8 with the exception of having 2 space indentations and max line length
 being 100.
 The code style is enforced by the pre-commit hook that runs autopep8 on the staged python files.
+
+
+Release
+-------
+
+You can create a new release and upload it to GitHub by running the `new_release.sh` script.
+It will replace the version, update the CHANGELOG, tag the release with a version tag and upload
+all these changes to GitHub.
 
 
 Terminology
