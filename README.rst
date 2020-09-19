@@ -51,10 +51,32 @@ To use Texas Holdem in a project::
 
   # Populates the global namespace with aliases for cards, e.g. SK for king of spades.
   from texas_holdem.shorthand_notations import *
-  from texas_holdem import compute_my_chances
+  from texas_holdem import compute_my_chances, Opponent
 
   compute_my_chances(hole_cards=[S2, DA], community_cards=[H2, D3, S5, C9])
   # 0.548594642072903
+
+  # You can also include assumptions in the calculation of your chances. To do this, create a
+  # subclass of the `Opponent` class and overwrite its `hole_card_weight` method to return
+  # a non-negative weight for each possible scenario. Scenario here means the combination of
+  # what board can be and what hole cards the opponent can have.
+  class Cautious(Opponent):
+    @staticmethod
+    def hole_card_weight(hole_cards, board):
+      from texas_holdem.evaluate_hand import get_hand_value, HandRank
+      # Weight depends on the hand rank.
+      hand_rank = get_hand_value(hole_cards, board).rank
+      if hand_rank >= HandRank.FOUR_OF_A_KIND:
+        return 1
+      elif hand_rank >= HandRank.FLUSH:
+        return 0.6
+      elif hand_rank >= HandRank.THREE_OF_A_KIND:
+        return 0.3
+      else:
+        return 0
+
+  compute_my_chances(hole_cards=[S2, DA], community_cards=[H2, D3, S5, C9], against=Cautious())
+  # 0.1140096618357479
 
 
 Development
