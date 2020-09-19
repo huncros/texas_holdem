@@ -2,7 +2,7 @@
 from typing import List
 from itertools import combinations
 
-from texas_holdem.card import HoleCards, Board, Card, list_all_cards
+from texas_holdem.card import HoleCards, Board, Card, list_all_cards, list_remaining_cards
 from texas_holdem.evaluate_hand import get_hand_value
 from texas_holdem.compare_hands import has_better_hand_than_hand_value
 
@@ -20,7 +20,3 @@ def find_better_hole_cards(my_hole_cards: HoleCards, board: Board) -> List[HoleC
     if has_better_hand_than_hand_value(opponent_hole_cards, board, my_hand_value):
       better_hole_cards.append(opponent_hole_cards)
   return better_hole_cards
-
-
-def list_remaining_cards(cards_seen):
-  return [card for card in list_all_cards() if card not in cards_seen]

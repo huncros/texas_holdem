@@ -65,6 +65,10 @@ def list_all_cards():
       yield Card(suit=suit, rank=rank)
 
 
+def list_remaining_cards(cards_seen):
+  return [card for card in list_all_cards() if card not in cards_seen]
+
+
 class HoleCards(NamedTuple):
   'The 2 private cards the player has.'
   c1: Card

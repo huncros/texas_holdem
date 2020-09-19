@@ -5,8 +5,8 @@ from itertools import combinations
 from statistics import mean
 from typing import Sequence, Tuple
 
-from texas_holdem.card import Card, HoleCards, Board
-from texas_holdem.find_better_hole_cards import find_better_hole_cards, list_remaining_cards
+from texas_holdem.card import Card, HoleCards, Board, list_remaining_cards
+from texas_holdem.find_better_hole_cards import find_better_hole_cards
 
 
 def compute(hole_cards: Sequence[Card], community_cards: Sequence[Card]):
