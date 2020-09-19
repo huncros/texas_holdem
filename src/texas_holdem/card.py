@@ -73,8 +73,13 @@ class HoleCards(NamedTuple):
   'The 2 private cards the player has.'
   c1: Card
   c2: Card
+
   def __eq__(self, other):
     return set(self) == set(other)
+
+  def __hash__(self):
+    c1, c2 = sorted([str(self.c1), str(self.c2)])
+    return hash(f'HoleCards({c1},{c2})')
 
 
 class Board(NamedTuple):

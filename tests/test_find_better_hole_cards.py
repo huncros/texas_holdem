@@ -11,7 +11,7 @@ class TestFindBetterHoleCards(unittest.TestCase):
     my_hole_cards = HoleCards(HQ, CQ)  # Has FULL_HOUSE with triplet of rank Q and pair of rank 5.
     better_hole_cards = find_better_hole_cards(my_hole_cards, board)
 
-    expected = [
+    expected = {
         # Form better FULL_HOUSE with triplet of rank K.
         HoleCards(HK, CK), HoleCards(HK, DK), HoleCards(CK, DK),
         # Form FOUR_OF_A_KIND with rank of 5.
@@ -20,7 +20,5 @@ class TestFindBetterHoleCards(unittest.TestCase):
         HoleCards(S9, S10),
         # Form ROYAL_FLUSH.
         HoleCards(S10, SA)
-        ]
-    self.assertEqual(len(better_hole_cards), len(expected))
-    for hc in better_hole_cards:
-      self.assertIn(hc, expected)
+        }
+    self.assertSetEqual(better_hole_cards, expected)

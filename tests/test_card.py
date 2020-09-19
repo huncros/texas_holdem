@@ -51,6 +51,8 @@ class TestCard(unittest.TestCase):
     hc1 = HoleCards(S2, DA)
     hc2 = HoleCards(DA, S2)
     self.assertEqual(hc1, hc2)
+    self.assertSetEqual({hc1}, {hc2})
+
 
   def test_parse(self):
     self.assertEqual(parse('S2'), Card(suit=Suit.SPADES, rank=Rank.TWO))
