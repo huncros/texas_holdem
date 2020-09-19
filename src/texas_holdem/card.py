@@ -77,9 +77,12 @@ class HoleCards(NamedTuple):
   def __eq__(self, other):
     return set(self) == set(other)
 
-  def __hash__(self):
+  def __str__(self):
     c1, c2 = sorted([str(self.c1), str(self.c2)])
-    return hash(f'HoleCards({c1},{c2})')
+    return f'HoleCards({c1},{c2})'
+
+  def __hash__(self):
+    return hash(str(self))
 
 
 class Board(NamedTuple):
