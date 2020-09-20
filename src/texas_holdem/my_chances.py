@@ -17,11 +17,11 @@ class Opponent(ABC):
   have a certain hand or better.
 
   These assumptions can be included in the calculation of your chances against the opponent.
-  To do this, subclass this class and overwrite the `hole_card_weight` method to return a
+  To do this, subclass this class and overwrite the `hole_cards_weight` method to return a
   non-negative weight representing the assumed likeliness of each scenario.
   '''
   @abstractmethod
-  def hole_card_weight(self, opponents_hole_cards: HoleCards, board: Board) -> float:
+  def hole_cards_weight(self, opponents_hole_cards: HoleCards, board: Board) -> float:
     pass
 
 
@@ -64,7 +64,7 @@ def compute(
   weighted_all_cases = sum(r['all'] for r in partition_results)
   if weighted_all_cases == 0:
     raise OpponentError(
-        'The `hole_card_weights` method of your `Opponent` instance returns 0 for every possible ' +
+        'The `hole_cards_weights` method of your `Opponent` instance returns 0 for every possible ' +
         'hole cards the opponent can have. Change the method so at least one possible hole cards ' +
         'receive positive weight.'
     )
@@ -86,12 +86,12 @@ def worker(hole_cards: HoleCards, board: Board, weights: Optional[Dict[HoleCards
 def _compute_weights(hole_cards: HoleCards, board: Board, opp=None):
   if opp is None:
     return
-  weights = {hc: opp.hole_card_weight(hc, board) for hc
+  weights = {hc: opp.hole_cards_weight(hc, board) for hc
       in _list_possible_opp_hole_cards(hole_cards, board)}
   negative_weights = {hc: w for hc, w in weights.items() if w < 0}
   if len(negative_weights) > 0:
     msg = (
-        'The `hole_card_weights` method of your `Opponent` instance returns negative weights for ' +
+        'The `hole_cards_weights` method of your `Opponent` instance returns negative weights for ' +
         'the following hole cards:\n')
     for hc, w in negative_weights.items():
       msg += f'  {hc}: {w}\n'

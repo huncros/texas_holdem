@@ -41,7 +41,7 @@ class TestMyChances(unittest.TestCase):
       def __init__(self, card):
         self.revealed_card = card
 
-      def hole_card_weight(self, hole_cards, board):
+      def hole_cards_weight(self, hole_cards, board):
         return 1 if self.revealed_card in hole_cards else 0
 
     opp = RevealedCard(H5)
@@ -65,7 +65,7 @@ class TestMyChances(unittest.TestCase):
     '''
     class NegativeWeights(Opponent):
       @staticmethod
-      def hole_card_weight(hole_cards, board):
+      def hole_cards_weight(hole_cards, board):
         return -1 if hole_cards == HoleCards(S2, S3) else 1
 
     opp = NegativeWeights()
@@ -80,7 +80,7 @@ class TestMyChances(unittest.TestCase):
     '''
     class AllZeros(Opponent):
       @staticmethod
-      def hole_card_weight(hole_cards, board):
+      def hole_cards_weight(hole_cards, board):
         return 0
 
     opp = AllZeros()

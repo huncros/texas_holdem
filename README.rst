@@ -68,7 +68,7 @@ To use Texas Holdem in a project::
   # means the combination of what board can be and what hole cards the opponent can have.
   class Cautious(Opponent):
     @staticmethod
-    def hole_card_weight(hole_cards, board):
+    def hole_cards_weight(hole_cards, board):
       from texas_holdem.evaluate_hand import get_hand_value, HandRank
       # Weight depends on the hand rank.
       hand_rank = get_hand_value(hole_cards, board).rank
@@ -93,7 +93,7 @@ To use Texas Holdem in a project::
     def __init__(self, card):
       self.revealed_card = card
 
-    def hole_card_weight(self, hole_cards, board):
+    def hole_cards_weight(self, hole_cards, board):
       return 1 if self.revealed_card in hole_cards else 0
 
 
