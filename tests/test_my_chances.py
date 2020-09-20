@@ -34,15 +34,17 @@ class TestMyChances(unittest.TestCase):
   def test_my_chances_with_assumptions(self):
     'Test the case when we have and assumption about our opponents hand.'
 
-    class RevealedBadCard(Opponent):
+    class RevealedCard(Opponent):
       '''The opponent didn't hide their hole cards correctly and so we have seen one of their
-      hole cards which is H5.
+      hole cards.
       '''
-      @staticmethod
-      def hole_card_weight(hole_cards, board):
-        return 1 if H5 in hole_cards else 0
+      def __init__(self, card):
+        self.revealed_card = card
 
-    opp = RevealedBadCard()
+      def hole_card_weight(self, hole_cards, board):
+        return 1 if self.revealed_card in hole_cards else 0
+
+    opp = RevealedCard(H5)
     my_chances = compute([DK, CK], [SJ, SQ, SK, HK], against=opp)
     # We have a FOUR_OF_A_KIND so the only way to beat it is to either form STRAIGHT_FLUSH by
     # getting the cards S9, S10 or to form ROYAL_FLUSH by getting the cards S10, SA.

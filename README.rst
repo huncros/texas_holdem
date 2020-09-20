@@ -81,8 +81,25 @@ To use Texas Holdem in a project::
       else:
         return 0
 
+
   compute_my_chances(hole_cards=[S2, DA], community_cards=[H2, D3, S5, C9], against=Cautious())
   # 0.1140096618357479
+
+
+  class RevealedCard(Opponent):
+    '''The opponent didn't hide their hole cards correctly and so we have seen one of their
+    hole cards.
+    '''
+    def __init__(self, card):
+      self.revealed_card = card
+
+    def hole_card_weight(self, hole_cards, board):
+      return 1 if self.revealed_card in hole_cards else 0
+
+
+  compute_my_chances(
+      hole_cards=[S2, DA], community_cards=[H2, D3, S5, C9], against=RevealedCard(SA))
+  # 0.6555555555555556
 
 
 Development

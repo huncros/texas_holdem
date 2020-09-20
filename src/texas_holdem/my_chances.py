@@ -20,9 +20,8 @@ class Opponent(ABC):
   To do this, subclass this class and overwrite the `hole_card_weight` method to return a
   non-negative weight representing the assumed likeliness of each scenario.
   '''
-  @staticmethod
   @abstractmethod
-  def hole_card_weight(opponents_hole_cards: HoleCards, board: Board) -> float:
+  def hole_card_weight(self, opponents_hole_cards: HoleCards, board: Board) -> float:
     pass
 
 
