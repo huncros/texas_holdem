@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 # Sets up local development environment.
 set xue
 
